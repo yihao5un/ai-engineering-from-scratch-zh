@@ -285,10 +285,10 @@
             });
           }
 
-          countEl.textContent = terms.length + ' of ' + GLOSSARY.length + ' terms';
+          countEl.textContent = '共 ' + GLOSSARY.length + ' 个术语，显示 ' + terms.length + ' 个';
 
           if (terms.length === 0) {
-            listEl.innerHTML = '<div class="glossary-empty">No terms match your search.</div>';
+            listEl.innerHTML = '<div class="glossary-empty">没有匹配的术语</div>';
             return;
           }
 
@@ -299,11 +299,11 @@
             html += '<div class="glossary-term">' + escapeHtml(t.term) + '</div>';
             html += '<div class="glossary-row">';
             html += '<div class="glossary-col">';
-            html += '<div class="glossary-col-label">What people say</div>';
+            html += '<div class="glossary-col-label">大家嘴上怎么说</div>';
             html += '<div class="glossary-col-says">"' + escapeHtml(t.says) + '"</div>';
             html += '</div>';
             html += '<div class="glossary-col">';
-            html += '<div class="glossary-col-label">What it actually means</div>';
+            html += '<div class="glossary-col-label">实际是什么意思</div>';
             html += '<div class="glossary-col-means">' + escapeHtml(t.means) + '</div>';
             html += '</div>';
             html += '</div>';

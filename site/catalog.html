@@ -371,6 +371,14 @@
           return div.innerHTML;
         }
 
+        function typeLabel(t) {
+          return { 'Build': '构建', 'Learn': '学习', 'Capstone': '顶点项目' }[t] || t;
+        }
+
+        function statusLabel(s) {
+          return { 'complete': '已完成', 'in-progress': '进行中', 'planned': '计划中' }[s] || s;
+        }
+
         function render() {
           var query = (searchInput.value || '').toLowerCase().trim();
           var phaseFilter = phaseSelect.value;
@@ -411,10 +419,10 @@
             return 0;
           });
 
-          countEl.textContent = rows.length + ' of ' + allRows.length + ' lessons';
+          countEl.textContent = '共 ' + allRows.length + ' 节，显示 ' + rows.length + ' 节';
 
           if (rows.length === 0) {
-            bodyEl.innerHTML = '<tr><td colspan="5" class="catalog-empty">No lessons match your filters.</td></tr>';
+            bodyEl.innerHTML = '<tr><td colspan="5" class="catalog-empty">没有符合筛选条件的课程</td></tr>';
             return;
           }
 
@@ -428,9 +436,9 @@
             } else {
               html += '<td>' + escapeHtml(r.name) + '</td>';
             }
-            html += '<td>' + escapeHtml(r.type) + '</td>';
+            html += '<td>' + escapeHtml(typeLabel(r.type)) + '</td>';
             html += '<td><span class="catalog-lang">' + escapeHtml(r.lang) + '</span></td>';
-            html += '<td><span class="catalog-status-dot ' + r.status + '"></span>' + r.status + '</td>';
+            html += '<td><span class="catalog-status-dot ' + r.status + '"></span>' + escapeHtml(statusLabel(r.status)) + '</td>';
             html += '</tr>';
           }
           bodyEl.innerHTML = html;
