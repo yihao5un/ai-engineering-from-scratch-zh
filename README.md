@@ -7,7 +7,7 @@
   <a href="ROADMAP.md"><img src="https://img.shields.io/badge/lessons-435-3553ff?style=flat-square&labelColor=fafaf5" alt="435 lessons"></a>
   <a href="#contents"><img src="https://img.shields.io/badge/phases-20-3553ff?style=flat-square&labelColor=fafaf5" alt="20 phases"></a>
   <a href="https://github.com/fancyboi999/ai-engineering-from-scratch-zh/stargazers"><img src="https://img.shields.io/github/stars/fancyboi999/ai-engineering-from-scratch-zh?style=flat-square&labelColor=fafaf5&color=3553ff" alt="GitHub stars"></a>
-  <a href="https://ai-engineering-from-scratch-zh.vercel.app"><img src="https://img.shields.io/badge/website-live-3553ff?style=flat-square&labelColor=fafaf5" alt="Website"></a>
+  <a href="https://aieng-zh.cn"><img src="https://img.shields.io/badge/website-live-3553ff?style=flat-square&labelColor=fafaf5" alt="Website"></a>
 </p>
 
 ```
@@ -107,7 +107,7 @@ flowchart LR
 三种入门方式。挑一个。
 
 **方式 A —— 阅读。** 在
-[ai-engineering-from-scratch-zh.vercel.app](https://ai-engineering-from-scratch-zh.vercel.app) 上打开任意一节已完成的课程，
+[aieng-zh.cn](https://aieng-zh.cn) 上打开任意一节已完成的课程，
 或展开 [目录](#contents) 里的某个阶段。无需配置，无需 clone。
 
 **方式 B —— clone 下来跑。**
@@ -1059,6 +1059,6 @@ MIT。随你怎么用——fork、拿去教学、拿去卖、拿去交付。欢�
 
 <sub>
   <a href="https://x.com/ghumare64">@ghumare64</a> &nbsp;·&nbsp;
-  <a href="https://ai-engineering-from-scratch-zh.vercel.app">ai-engineering-from-scratch-zh.vercel.app</a> &nbsp;·&nbsp;
+  <a href="https://aieng-zh.cn">aieng-zh.cn</a> &nbsp;·&nbsp;
   <a href="https://github.com/fancyboi999/ai-engineering-from-scratch-zh/issues/new/choose">Report / Suggest</a>
 </sub>
