@@ -84,7 +84,7 @@ flowchart TB
 phases/<NN>-<phase-name>/<NN>-<lesson-name>/
 ├── code/      可运行的实现（Python、TypeScript、Rust、Julia）
 ├── docs/
-│   └── en.md  课程正文
+│   └── zh.md  课程正文
 └── outputs/   本节课产出的提示词、技能、agent 或 MCP server
 ```
 
@@ -1036,7 +1036,7 @@ python3 scripts/audit_lessons.py --phase 14  # 单个阶段
 python3 scripts/audit_lessons.py --json    # 适合 CI 的输出
 ```
 
-任一规则失败时退出码非零。规则（L001–L010）会校验目录结构、`docs/en.md` 是否存在
+任一规则失败时退出码非零。规则（L001–L010）会校验目录结构、`docs/zh.md` 是否存在
 及是否有 H1、`code/` 是否非空、`quiz.json` 的 schema（拒绝引发 issue #102 的旧版
 `q/choices/answer` 键），以及课程文档里的相对链接。
 

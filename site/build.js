@@ -222,9 +222,9 @@ function parseReadme(content, roadmapStatuses) {
   return phases;
 }
 
-// ─── Extract lesson summary + keywords from docs/en.md ───────────────
+// ─── Extract lesson summary + keywords from docs/zh.md ───────────────
 /**
- * Single-pass read of a lesson's docs/en.md.
+ * Single-pass read of a lesson's docs/zh.md.
  *
  * Returns:
  *   summary  — first `> blockquote` line (the lesson's one-liner motto).
@@ -237,7 +237,7 @@ function parseReadme(content, roadmapStatuses) {
  * matching content — expected for planned lessons with no docs yet.
  */
 function extractLessonMeta(relPath) {
-  const docPath = path.join(REPO_ROOT, relPath, 'docs', 'en.md');
+  const docPath = path.join(REPO_ROOT, relPath, 'docs', 'zh.md');
   const result = { summary: '', keywords: '' };
   try {
     const lines = fs.readFileSync(docPath, 'utf8').split(/\r?\n/);
@@ -409,7 +409,7 @@ function build() {
   console.log('🔍 Discovering outputs + Phase 14 missions...');
   const artifacts = discoverArtifacts();
 
-  console.log('📚 Extracting lesson summaries + keywords from docs/en.md...');
+  console.log('📚 Extracting lesson summaries + keywords from docs/zh.md...');
   let summarized = 0, withKeywords = 0;
   for (const phase of phases) {
     for (const lesson of phase.lessons) {
