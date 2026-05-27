@@ -748,34 +748,34 @@ the agent went wrong and explain why...
 
 | # | Lesson | Type | Lang |
 |:---:|--------|:----:|------|
-| 01 | 托管 LLM 平台 — Bedrock、Azure OpenAI、Vertex AI | Learn | Python |
-| 02 | 推理平台经济学 — Fireworks、Together、Baseten、Modal | Learn | Python |
-| 03 | Kubernetes 上的 GPU 自动扩缩 — Karpenter、KAI Scheduler | Learn | Python |
-| 04 | vLLM 服务内部机制 — PagedAttention、连续批处理、分块预填充 | Learn | Python |
-| 05 | 生产环境中的 EAGLE-3 推测解码 | Learn | Python |
-| 06 | 面向前缀密集型负载的 SGLang 与 RadixAttention | Learn | Python |
-| 07 | Blackwell 上用 FP8 与 NVFP4 的 TensorRT-LLM | Learn | Python |
-| 08 | 推理指标 — TTFT、TPOT、ITL、Goodput、P99 | Learn | Python |
-| 09 | 生产级量化 — AWQ、GPTQ、GGUF、FP8、NVFP4 | Learn | Python |
-| 10 | 无服务器 LLM 的冷启动缓解 | Learn | Python |
-| 11 | 多区域 LLM 服务与 KV 缓存局部性 | Learn | Python |
-| 12 | 边缘推理 — ANE、Hexagon、WebGPU、Jetson | Learn | Python |
-| 13 | LLM 可观测性技术栈选型 | Learn | Python |
-| 14 | 提示缓存与语义缓存的经济学 | Learn | Python |
-| 15 | 批处理 API — 50% 折扣作为行业标准 | Learn | Python |
-| 16 | 把模型路由作为降本原语 | Learn | Python |
-| 17 | 预填充/解码分离 — NVIDIA Dynamo 与 llm-d | Learn | Python |
-| 18 | 带 LMCache KV 卸载的 vLLM 生产栈 | Learn | Python |
-| 19 | AI 网关 — LiteLLM、Portkey、Kong、Bifrost | Learn | Python |
-| 20 | 影子、金丝雀与渐进式部署 | Learn | Python |
-| 21 | LLM 功能的 A/B 测试 — GrowthBook 与 Statsig | Learn | Python |
-| 22 | LLM API 的负载测试 — k6、LLMPerf、GenAI-Perf | Build | Python |
-| 23 | 面向 AI 的 SRE — 多智能体事件响应 | Learn | Python |
-| 24 | 面向 LLM 生产的混沌工程 | Learn | Python |
-| 25 | 安全 — 密钥、PII 脱敏、审计日志 | Learn | Python |
-| 26 | 合规 — SOC 2、HIPAA、GDPR、EU AI Act、ISO 42001 | Learn | Python |
-| 27 | 面向 LLM 的 FinOps — 单位经济与多租户归因 | Learn | Python |
-| 28 | 自托管服务选型 — llama.cpp、Ollama、TGI、vLLM、SGLang | Learn | Python |
+| 01 | [托管 LLM 平台 — Bedrock、Azure OpenAI、Vertex AI](phases/17-infrastructure-and-production/01-managed-llm-platforms/) | Learn | Python |
+| 02 | [推理平台经济学 — Fireworks、Together、Baseten、Modal](phases/17-infrastructure-and-production/02-inference-platform-economics/) | Learn | Python |
+| 03 | [Kubernetes 上的 GPU 自动扩缩 — Karpenter、KAI Scheduler](phases/17-infrastructure-and-production/03-gpu-autoscaling-kubernetes/) | Learn | Python |
+| 04 | [vLLM 服务内部机制 — PagedAttention、连续批处理、分块预填充](phases/17-infrastructure-and-production/04-vllm-serving-internals/) | Learn | Python |
+| 05 | [生产环境中的 EAGLE-3 推测解码](phases/17-infrastructure-and-production/05-eagle3-speculative-decoding/) | Learn | Python |
+| 06 | [面向前缀密集型负载的 SGLang 与 RadixAttention](phases/17-infrastructure-and-production/06-sglang-radixattention/) | Learn | Python |
+| 07 | [Blackwell 上用 FP8 与 NVFP4 的 TensorRT-LLM](phases/17-infrastructure-and-production/07-tensorrt-llm-blackwell/) | Learn | Python |
+| 08 | [推理指标 — TTFT、TPOT、ITL、Goodput、P99](phases/17-infrastructure-and-production/08-inference-metrics-goodput/) | Learn | Python |
+| 09 | [生产级量化 — AWQ、GPTQ、GGUF、FP8、NVFP4](phases/17-infrastructure-and-production/09-production-quantization/) | Learn | Python |
+| 10 | [无服务器 LLM 的冷启动缓解](phases/17-infrastructure-and-production/10-cold-start-mitigation/) | Learn | Python |
+| 11 | [多区域 LLM 服务与 KV 缓存局部性](phases/17-infrastructure-and-production/11-multi-region-kv-locality/) | Learn | Python |
+| 12 | [边缘推理 — ANE、Hexagon、WebGPU、Jetson](phases/17-infrastructure-and-production/12-edge-inference/) | Learn | Python |
+| 13 | [LLM 可观测性技术栈选型](phases/17-infrastructure-and-production/13-llm-observability/) | Learn | Python |
+| 14 | [提示缓存与语义缓存的经济学](phases/17-infrastructure-and-production/14-prompt-semantic-caching/) | Learn | Python |
+| 15 | [批处理 API — 50% 折扣作为行业标准](phases/17-infrastructure-and-production/15-batch-apis/) | Learn | Python |
+| 16 | [把模型路由作为降本原语](phases/17-infrastructure-and-production/16-model-routing/) | Learn | Python |
+| 17 | [预填充/解码分离 — NVIDIA Dynamo 与 llm-d](phases/17-infrastructure-and-production/17-disaggregated-prefill-decode/) | Learn | Python |
+| 18 | [带 LMCache KV 卸载的 vLLM 生产栈](phases/17-infrastructure-and-production/18-vllm-production-stack-lmcache/) | Learn | Python |
+| 19 | [AI 网关 — LiteLLM、Portkey、Kong、Bifrost](phases/17-infrastructure-and-production/19-ai-gateways/) | Learn | Python |
+| 20 | [影子、金丝雀与渐进式部署](phases/17-infrastructure-and-production/20-shadow-canary-progressive/) | Learn | Python |
+| 21 | [LLM 功能的 A/B 测试 — GrowthBook 与 Statsig](phases/17-infrastructure-and-production/21-ab-testing-llm-features/) | Learn | Python |
+| 22 | [LLM API 的负载测试 — k6、LLMPerf、GenAI-Perf](phases/17-infrastructure-and-production/22-load-testing-llm-apis/) | Build | Python |
+| 23 | [面向 AI 的 SRE — 多智能体事件响应](phases/17-infrastructure-and-production/23-sre-for-ai/) | Learn | Python |
+| 24 | [面向 LLM 生产的混沌工程](phases/17-infrastructure-and-production/24-chaos-engineering-llm/) | Learn | Python |
+| 25 | [安全 — 密钥、PII 脱敏、审计日志](phases/17-infrastructure-and-production/25-security-secrets-audit/) | Learn | Python |
+| 26 | [合规 — SOC 2、HIPAA、GDPR、EU AI Act、ISO 42001](phases/17-infrastructure-and-production/26-compliance-frameworks/) | Learn | Python |
+| 27 | [面向 LLM 的 FinOps — 单位经济与多租户归因](phases/17-infrastructure-and-production/27-finops-llms/) | Learn | Python |
+| 28 | [自托管服务选型 — llama.cpp、Ollama、TGI、vLLM、SGLang](phases/17-infrastructure-and-production/28-self-hosted-serving-selection/) | Learn | Python |
 
 </details>
 
