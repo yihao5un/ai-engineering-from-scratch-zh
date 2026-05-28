@@ -512,7 +512,7 @@
 | 29 | [审核系统 — OpenAI、Perspective、Llama Guard](phases/18-ethics-safety-alignment/29-moderation-systems-openai-perspective-llamaguard) | ✅ | ~60 min |
 | 30 | [两用风险 — 网络、生物、化学、核](phases/18-ethics-safety-alignment/30-dual-use-risk-cyber-bio-chem-nuclear) | ✅ | ~75 min |
 
-## Phase 19: 总结项目 — ✅ (~500 hours)
+## Phase 19: 总结项目 — ✅ (~800 hours)
 
 | # | Project | Status | Est. |
 |---|---------|--------|------|
@@ -533,9 +533,47 @@
 | 15 | [Constitutional 安全护栏 + 红队靶场](phases/19-capstone-projects/15-constitutional-safety-harness) | ✅ | ~25 hr |
 | 16 | [GitHub Issue 到 PR 的自主智能体](phases/19-capstone-projects/16-github-issue-to-pr-agent) | ✅ | ~30 hr |
 | 17 | [个人 AI 导师 (自适应、多模态)](phases/19-capstone-projects/17-personal-ai-tutor) | ✅ | ~30 hr |
+| 20 | [Agent Harness Loop 契约](phases/19-capstone-projects/20-agent-harness-loop-contract) | ✅ | ~90 min |
+| 21 | [带 Schema 校验的 Tool Registry](phases/19-capstone-projects/21-tool-registry-schema-validation) | ✅ | ~90 min |
+| 22 | [基于换行分隔 stdio 的 JSON-RPC 2.0](phases/19-capstone-projects/22-jsonrpc-stdio-transport) | ✅ | ~90 min |
+| 23 | [Function Call Dispatcher](phases/19-capstone-projects/23-function-call-dispatcher) | ✅ | ~90 min |
+| 24 | [Plan-Execute 控制流](phases/19-capstone-projects/24-plan-execute-control-flow) | ✅ | ~90 min |
+| 25 | [Verification Gate 与 Observation Budget](phases/19-capstone-projects/25-verification-gates-observation-budget) | ✅ | ~90 min |
+| 26 | [带 Denylist 与 Path Jail 的 Sandbox Runner](phases/19-capstone-projects/26-sandbox-runner-denylist) | ✅ | ~90 min |
+| 27 | [带 Fixture Tasks 的 Eval Harness](phases/19-capstone-projects/27-eval-harness-fixture-tasks) | ✅ | ~90 min |
+| 28 | [用 OTel GenAI Span 与 Prometheus 做 Observability](phases/19-capstone-projects/28-observability-otel-traces) | ✅ | ~90 min |
+| 29 | [端到端 Coding Agent Demo](phases/19-capstone-projects/29-end-to-end-coding-task-demo) | ✅ | ~90 min |
+| 30 | [从零实现 BPE Tokenizer](phases/19-capstone-projects/30-bpe-tokenizer-from-scratch) | ✅ | ~90 min |
+| 31 | [带 Sliding Window 的 Tokenized Dataset](phases/19-capstone-projects/31-tokenized-dataset-sliding-window) | ✅ | ~90 min |
+| 32 | [Token Embedding 与 Positional Embedding](phases/19-capstone-projects/32-token-positional-embeddings) | ✅ | ~90 min |
+| 33 | [Multi-Head Self-Attention](phases/19-capstone-projects/33-multihead-self-attention) | ✅ | ~90 min |
+| 34 | [从零实现 Transformer Block](phases/19-capstone-projects/34-transformer-block) | ✅ | ~90 min |
+| 35 | [GPT 模型组装](phases/19-capstone-projects/35-gpt-model-assembly) | ✅ | ~90 min |
+| 36 | [训练循环与评估](phases/19-capstone-projects/36-training-loop-eval) | ✅ | ~90 min |
+| 37 | [加载预训练权重](phases/19-capstone-projects/37-loading-pretrained-weights) | ✅ | ~90 min |
+| 38 | [通过换 Head 做分类微调](phases/19-capstone-projects/38-classifier-finetuning) | ✅ | ~90 min |
+| 39 | [通过 SFT 做 Instruction Tuning](phases/19-capstone-projects/39-instruction-tuning-sft) | ✅ | ~90 min |
+| 40 | [从零实现 DPO](phases/19-capstone-projects/40-dpo-from-scratch) | ✅ | ~90 min |
+| 41 | [完整评估流水线](phases/19-capstone-projects/41-eval-pipeline) | ✅ | ~90 min |
+| 42 | [大规模语料下载器](phases/19-capstone-projects/42-large-corpus-downloader) | ✅ | ~90 min |
+| 43 | [HDF5 Tokenized Corpus](phases/19-capstone-projects/43-hdf5-tokenized-corpus) | ✅ | ~90 min |
+| 44 | [Cosine 学习率 + 线性 Warmup](phases/19-capstone-projects/44-cosine-lr-warmup) | ✅ | ~90 min |
+| 45 | [Gradient Clipping 与混合精度训练](phases/19-capstone-projects/45-gradient-clipping-amp) | ✅ | ~90 min |
+| 46 | [梯度累积](phases/19-capstone-projects/46-gradient-accumulation) | ✅ | ~90 min |
+| 47 | [Checkpoint 保存与恢复](phases/19-capstone-projects/47-checkpoint-save-resume) | ✅ | ~90 min |
+| 48 | [从零实现分布式数据并行与 FSDP](phases/19-capstone-projects/48-distributed-fsdp-ddp) | ✅ | ~90 min |
+| 49 | [语言模型评测框架](phases/19-capstone-projects/49-lm-eval-harness) | ✅ | ~90 min |
+| 50 | [假设生成器](phases/19-capstone-projects/50-hypothesis-generator) | ✅ | ~90 min |
+| 51 | [文献检索](phases/19-capstone-projects/51-literature-retrieval) | ✅ | ~90 min |
+| 52 | [实验执行器](phases/19-capstone-projects/52-experiment-runner) | ✅ | ~90 min |
+| 53 | [结果评估器](phases/19-capstone-projects/53-result-evaluator) | ✅ | ~90 min |
+| 54 | [论文生成器](phases/19-capstone-projects/54-paper-writer) | ✅ | ~90 min |
+| 55 | [评审循环](phases/19-capstone-projects/55-critic-loop) | ✅ | ~90 min |
+| 56 | [迭代调度器](phases/19-capstone-projects/56-iteration-scheduler) | ✅ | ~90 min |
+| 57 | [端到端研究 Demo](phases/19-capstone-projects/57-end-to-end-research-demo) | ✅ | ~90 min |
 
 ---
 
-**总计：20 个阶段，380+ 节课 | 350+ 已完成 | 预计约 950 小时**
+**总计：20 个阶段，430+ 节课 | 430+ 已完成 | 预计约 1000 小时**
 
 想出一份力？挑任意一节 ⬚ 课提交 PR。详见 [CONTRIBUTING.md](CONTRIBUTING.md)。

@@ -1,6 +1,6 @@
 # 主题建模 —— LDA 与 BERTopic
 
-> LDA：文档是主题的混合，主题是词上的分布。BERTopic：文档在 embedding 空间里聚类，簇就是主题。目标相同，原语不同。
+> LDA：文档是主题的混合，主题是词上的分布。BERTopic：文档在 embedding 空间里聚类，簇就是主题。目标相同，分解方式不同。
 
 **类型：** Learn
 **语言：** Python

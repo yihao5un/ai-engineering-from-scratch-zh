@@ -11,7 +11,7 @@
 
 你有一个需要不止一次 LLM 调用的任务。也许是一个研究工作流（规划、搜索、摘要、引用）。也许是一条代码评审流水线（解析 diff、批评、打补丁、校验）。也许是一个多轮助手，订机票、写邮件、报销。你挑了一个框架。
 
-三天后，你发现框架的抽象在漏。CrewAI 给你角色，但当"researcher"需要把一份结构化计划交给"writer"时它跟你较劲。AutoGen 给你 agent 之间的对话，但没有一等的状态，所以你的 checkpoint 是一份对话日志的 pickle。LangGraph 给你一张状态图，但逼你在还不知道 agent 会做什么之前就给每个转移命名。Agno 给你一个单 agent 原语，当你想扇出到三个并发 worker 时它直接尖叫。
+三天后，你发现框架的抽象在漏。CrewAI 给你角色，但当"researcher"需要把一份结构化计划交给"writer"时它跟你较劲。AutoGen 给你 agent 之间的对话，但没有一等的状态，所以你的 checkpoint 是一份对话日志的 pickle。LangGraph 给你一张状态图，但逼你在还不知道 agent 会做什么之前就给每个转移命名。Agno 给你一个单 agent 抽象，当你想扇出到三个并发 worker 时它直接尖叫。
 
 解法不是"挑最好的框架"。而是把框架的核心抽象与你问题的形状匹配上。本课画出那张地图。
 
@@ -117,7 +117,7 @@
 | Crew | "一个 CrewAI 团队" | 角色 + 任务 + 流程（顺序或层级）绑成一个单一 runnable。 |
 | GroupChat | "AutoGen 的多 agent 聊天" | N 个 agent 之间一场带说话者选择器的受管对话。 |
 | Team（Agno） | "多 agent 的 Agno" | 在一组 agent 上的 route / coordinate / collaborate 模式。 |
-| StateGraph | "LangGraph 的图" | 有类型状态、节点、条件边、checkpointer 的原语。 |
+| StateGraph | "LangGraph 的图" | 有类型状态、节点、条件边、checkpointer 的抽象。 |
 
 ## 延伸阅读
 
@@ -126,7 +126,7 @@
 - [AutoGen documentation](https://microsoft.github.io/autogen/)——ConversableAgent、GroupChat、团队、工具。
 - [Agno documentation](https://docs.agno.com/)——Agent、Team、Workflow、存储、记忆。
 - [Anthropic — Building effective agents (Dec 2024)](https://www.anthropic.com/research/building-effective-agents)——与框架无关的模式库（prompt chaining、routing、parallelization、orchestrator-workers、evaluator-optimizer）。
-- [Yao et al., "ReAct: Synergizing Reasoning and Acting" (ICLR 2023)](https://arxiv.org/abs/2210.03629)——每个框架都给它穿上不同外衣的那个原语。
+- [Yao et al., "ReAct: Synergizing Reasoning and Acting" (ICLR 2023)](https://arxiv.org/abs/2210.03629)——每个框架都给它穿上不同外衣的那个 loop。
 - [Wu et al., "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation" (2023)](https://arxiv.org/abs/2308.08155)——AutoGen 的设计论文。
 - [Park et al., "Generative Agents: Interactive Simulacra of Human Behavior" (UIST 2023)](https://arxiv.org/abs/2304.03442)——CrewAI 风格人设栈所基于的角色扮演基础。
 - 阶段 11 · 16（LangGraph）——本课用来做基准对比的那个框架。

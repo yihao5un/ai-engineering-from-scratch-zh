@@ -39,7 +39,7 @@
     },
     {
       "stage": "post",
-      "question": "哪个框架内置了直接挂在 Agent 原语上的存储驱动（SQLite、Postgres、Redis、Mongo、DynamoDB），用于会话和记忆持久化？",
+      "question": "哪个框架内置了直接挂在 Agent 类上的存储驱动（SQLite、Postgres、Redis、Mongo、DynamoDB），用于会话和记忆持久化？",
       "options": [
         "LangGraph",
         "CrewAI",
