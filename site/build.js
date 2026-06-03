@@ -451,6 +451,32 @@ const ARTIFACTS = ${JSON.stringify(artifacts, null, 2)};
 
   fs.writeFileSync(OUTPUT_PATH, output, 'utf8');
   console.log(`\n✅ Generated ${OUTPUT_PATH}`);
+
+  syncCounts(totalLessons, artifacts.length);
+}
+
+// ─── 自动同步站点文案里的课程数 / 产出数（单一真相 = 本次构建）─────
+// 每次同步新课只需在 README 表格补行 + 跑 build，站点这些散落的数字
+// 会自动对齐，不必手动逐个改（435 漂了好几个月、489 项产出过时都因此）。
+// 只处理站点模板文件，不碰 README——README 每个 phase 标题有
+// `<code>N lessons</code>` 单 phase 课数，全局替换会误伤成全局总数。
+function syncCounts(lessons, outputs) {
+  const targets = ['index.html', 'catalog.html', 'prereqs.html', 'lesson.html', 'cmdpalette.js'];
+  for (const f of targets) {
+    const p = path.join(__dirname, f);
+    if (!fs.existsSync(p)) continue;
+    const before = fs.readFileSync(p, 'utf8');
+    const after = before
+      .replace(/\d+( 节课程)/g, lessons + '$1')        // 节课程 先于 节课，避免误伤
+      .replace(/\d+ 节课(?!程)/g, lessons + ' 节课')   // 节课（后面不是「程」）
+      .replace(/\d+( 节 AI 工程)/g, lessons + '$1')
+      .replace(/\d+( lessons)\b/g, lessons + '$1')      // 英文 og/meta
+      .replace(/\d+( 项产出)/g, outputs + '$1');
+    if (after !== before) {
+      fs.writeFileSync(p, after, 'utf8');
+      console.log(`   synced counts in ${f}`);
+    }
+  }
 }
 
 build();
