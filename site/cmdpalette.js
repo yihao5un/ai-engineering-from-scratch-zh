@@ -354,7 +354,7 @@
     if (!query) {
       list.innerHTML =
         '<li class="cp-empty" role="option" aria-disabled="true">' +
-        '输入关键词，搜索 435 节课程、489 项产出以及术语表' +
+        '输入关键词，搜索 498 节课程、489 项产出以及术语表' +
         '</li>';
       _activeIdx = -1;
       return;
