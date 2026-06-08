@@ -101,6 +101,12 @@ Scores = Q @ K^T    shape: (n, n)
 每一行：一个 token 对整个序列的注意力
 ```
 
+看着一个 query 逐个扫过所有 key：每一行给每个 token 打分，softmax 把分数变成权重，context 向量就是 value 的加权融合。
+
+```figure
+attention-matrix
+```
+
 ### 为什么要缩放？
 
 点积随维度 dk 增大。如果 dk = 64，点积可能落在几十的量级，把 softmax 推进梯度消失的区域。修法是：除以 sqrt(dk)。
@@ -138,24 +144,17 @@ output_i = sum( attention_weight[i][j] * v_j  for all j )
 
 ### 完整流水线
 
-```
-                    +-------+
-  X (input)  ----->|  @ Wq  |-----> Q
-                    +-------+
-                    +-------+
-  X (input)  ----->|  @ Wk  |-----> K
-                    +-------+                     +----------+
-                    +-------+                     |          |
-  X (input)  ----->|  @ Wv  |-----> V ---------->| weighted |----> output
-                    +-------+          ^          |   sum    |
-                                       |          +----------+
-                              +--------+--------+
-                              |    softmax      |
-                              +---------+-------+
-                                        ^
-                              +---------+-------+
-                              | Q @ K^T / sqrt  |
-                              +-----------------+
+```mermaid
+flowchart LR
+  X["X (输入)"] --> Q["Q = X · Wq"]
+  X --> K["K = X · Wk"]
+  X --> V["V = X · Wv"]
+  Q --> S["Q · Kᵀ / √dk"]
+  K --> S
+  S --> SM["softmax"]
+  SM --> WS["加权求和"]
+  V --> WS
+  WS --> O["输出"]
 ```
 
 一行公式：

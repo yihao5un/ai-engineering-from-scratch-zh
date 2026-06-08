@@ -28,6 +28,12 @@
 5. **层归一化。** `LayerNorm` 或 `RMSNorm`（现代）。稳定残差流。
 6. **Cross-attention（仅解码器）。** query 来自解码器，key 和 value 来自编码器输出。
 
+看一个向量怎么流过一个 block：注意力跨位置做混合，残差把它往前带，FFN 做变换，归一化保持残差流稳定。
+
+```figure
+transformer-block
+```
+
 ### Encoder block（BERT、T5 编码器在用）
 
 ```

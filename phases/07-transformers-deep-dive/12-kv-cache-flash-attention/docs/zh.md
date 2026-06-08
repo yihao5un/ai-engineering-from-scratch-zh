@@ -53,6 +53,12 @@ per 32K context = 10.4 GB
 
 **GQA 是 KV 缓存的胜利。** 64 头的 MHA 会是 32 GB。MLA 压得更狠。
 
+拖动各个维度，看缓存大小怎么变。把序列长度或批大小往上拉，看它多快就冲破一块 GPU 的容量：
+
+```figure
+kv-cache-sizer
+```
+
 ### Flash Attention —— 分块把戏
 
 标准注意力：

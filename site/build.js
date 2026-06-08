@@ -18,6 +18,14 @@ const GLOSSARY_PATH = path.join(REPO_ROOT, 'glossary', 'terms.md');
 const OUTPUT_PATH = path.join(__dirname, 'data.js');
 
 const GITHUB_BASE = 'https://github.com/fancyboi999/ai-engineering-from-scratch-zh/tree/main/';
+const SITE_ORIGIN = 'https://aieng-zh.cn';
+
+// GITHUB_BASE lesson url -> site path "phases/<phase>/<lesson>"
+function lessonPath(url) {
+  if (!url) return null;
+  const m = url.match(/(phases\/[^/]+\/[^/]+)\/?$/);
+  return m ? m[1] : null;
+}
 
 // ─── Parse ROADMAP.md for lesson statuses ────────────────────────────
 function parseRoadmap(content) {
@@ -453,6 +461,64 @@ const ARTIFACTS = ${JSON.stringify(artifacts, null, 2)};
   console.log(`\n✅ Generated ${OUTPUT_PATH}`);
 
   syncCounts(totalLessons, artifacts.length);
+  writeSitemap(phases, glossaryTerms.length);
+  writeLlms(phases, glossaryTerms.length, artifacts.length);
+}
+
+// ─── sitemap.xml：从站点渲染的同一份 PHASES 生成 ─────────────────────
+function writeSitemap(phases, glossaryCount) {
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = [
+    { loc: '/', priority: '1.0', freq: 'weekly' },
+    { loc: '/catalog.html', priority: '0.8', freq: 'weekly' },
+    { loc: '/prereqs.html', priority: '0.7', freq: 'monthly' },
+    { loc: '/about.html', priority: '0.5', freq: 'monthly' },
+  ];
+  if (glossaryCount > 0) urls.push({ loc: '/glossary.html', priority: '0.6', freq: 'monthly' });
+  for (const phase of phases) {
+    for (const l of phase.lessons) {
+      const p = lessonPath(l.url);
+      if (p) urls.push({ loc: '/lesson.html?path=' + p, priority: '0.6', freq: 'monthly' });
+    }
+  }
+  const body = urls.map(u =>
+    `  <url>\n    <loc>${SITE_ORIGIN}${u.loc}</loc>\n` +
+    `    <lastmod>${today}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n` +
+    `    <priority>${u.priority}</priority>\n  </url>`).join('\n');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
+  fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), xml, 'utf8');
+  console.log(`   wrote sitemap.xml (${urls.length} URLs)`);
+}
+
+// ─── llms.txt：给 AI agent 的课程地图（链接丰富）─────────────────────
+function writeLlms(phases, glossaryCount, artifactCount) {
+  let total = 0;
+  phases.forEach(p => { total += p.lessons.filter(l => lessonPath(l.url)).length; });
+  let out = `# AI Engineering from Scratch · 简体中文版\n\n`;
+  out += `> 一套免费、开源的 AI 工程课程，从零亲手实现每一个核心算法——${total} 节课，横跨 ${phases.length} 个阶段，从线性代数到自主 agent。Python、TypeScript、Rust、Julia。本站为简体中文翻译版。\n\n`;
+  out += `Canonical site: ${SITE_ORIGIN}\n`;
+  out += `Source: https://github.com/fancyboi999/ai-engineering-from-scratch-zh\n`;
+  out += `Upstream: https://github.com/rohitg00/ai-engineering-from-scratch\n`;
+  out += `Glossary terms: ${glossaryCount} · Reusable outputs (prompts/skills/agents): ${artifactCount}\n\n`;
+  for (const phase of phases) {
+    out += `## 阶段 ${phase.id}：${phase.name}\n`;
+    if (phase.desc) out += `${phase.desc}\n`;
+    out += `\n`;
+    for (const l of phase.lessons) {
+      const p = lessonPath(l.url);
+      if (!p) continue;
+      const note = l.summary ? ` — ${l.summary}` : '';
+      out += `- [${l.name}](${SITE_ORIGIN}/lesson.html?path=${p})${note}\n`;
+    }
+    out += `\n`;
+  }
+  out += `## 其它\n`;
+  out += `- [课程表](${SITE_ORIGIN}/catalog.html) — 可搜索的完整课程索引\n`;
+  out += `- [路线图](${SITE_ORIGIN}/prereqs.html) — 跨阶段的前置依赖顺序\n`;
+  if (glossaryCount > 0) out += `- [术语表](${SITE_ORIGIN}/glossary.html) — ${glossaryCount} 个术语的通俗定义\n`;
+  fs.writeFileSync(path.join(__dirname, 'llms.txt'), out, 'utf8');
+  console.log(`   wrote llms.txt`);
 }
 
 // ─── 自动同步站点文案里的课程数 / 产出数（单一真相 = 本次构建）─────

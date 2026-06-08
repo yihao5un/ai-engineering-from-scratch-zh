@@ -7,7 +7,8 @@
     { "source": "/glossary", "destination": "/glossary.html" },
     { "source": "/catalog", "destination": "/catalog.html" },
     { "source": "/path", "destination": "/prereqs.html" },
-    { "source": "/roadmap", "destination": "/prereqs.html" }
+    { "source": "/roadmap", "destination": "/prereqs.html" },
+    { "source": "/about", "destination": "/about.html" }
   ],
   "headers": [
     {
@@ -29,7 +30,7 @@
       ]
     },
     {
-      "source": "/(glossary|catalog|path|roadmap)",
+      "source": "/(glossary|catalog|path|roadmap|about)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=86400, stale-while-revalidate=604800" }
       ]

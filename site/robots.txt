@@ -32,6 +32,21 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
+# --- Allowed: AI grounding / answer engines (drive citations) ---
+# Google-Extended 驱动 AI Overviews + Gemini grounding（AI 回答里最大的曝光面），
+# 允许它们：用「训练 opt-out」换「被引用的覆盖面」。
+User-agent: Google-Extended
+Allow: /
+
+User-agent: FirecrawlAgent
+Allow: /
+
+User-agent: Context7
+Allow: /
+
+User-agent: Crawl4AI
+Allow: /
+
 # --- Blocked: training crawlers ---
 User-agent: GPTBot
 Disallow: /
@@ -43,9 +58,6 @@ User-agent: anthropic-ai
 Disallow: /
 
 User-agent: CCBot
-Disallow: /
-
-User-agent: Google-Extended
 Disallow: /
 
 User-agent: Applebot-Extended
@@ -119,4 +131,4 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://ai-engineering-from-scratch.vercel.app/sitemap.xml
+Sitemap: https://aieng-zh.cn/sitemap.xml
