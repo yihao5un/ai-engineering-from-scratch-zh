@@ -239,7 +239,10 @@
 
       html += '<div class="modal-lesson' + (userComplete ? ' user-done' : '') + '">';
       html += '<span class="modal-lesson-status ' + statusClass + '"' + (userComplete ? ' title="你已完成本节课"' : '') + '></span>';
-      if (l.url) {
+      var siteUrl = lessonPath ? '/lessons/' + lessonPath.replace(/^phases\//, '') + '/' : '';
+      if (siteUrl) {
+        html += '<a href="' + siteUrl + '">' + escapeHtml(l.name) + '</a>';   // 课名进站内阅读页
+      } else if (l.url) {
         html += '<a href="' + l.url + '" target="_blank" rel="noopener">' + escapeHtml(l.name) + '</a>';
       } else {
         html += '<a>' + escapeHtml(l.name) + '</a>';
@@ -247,9 +250,10 @@
       html += '<span class="modal-lesson-type" data-type="' + escapeHtml(l.type) + '"' + (l.combines ? ' title="合并自：' + escapeHtml(l.combines) + '"' : '') + '>' + escapeHtml(typeLabel(l.type)) + '</span>';
       html += '<span class="modal-lesson-lang">' + escapeHtml(l.lang) + '</span>';
 
+      // 列5:GitHub 源码小图标(课名已进站内阅读,这里降为次要源码入口)
       var actionHtml = '';
-      if ((l.status === 'complete' || userComplete) && lessonPath) {
-        actionHtml = '<a href="/lessons/' + lessonPath.replace(/^phases\//, '') + '/" class="modal-lesson-read">' + (userComplete ? '回顾' : '阅读') + '</a>';
+      if (l.url) {
+        actionHtml = '<a href="' + l.url + '" target="_blank" rel="noopener" class="modal-lesson-src" title="在 GitHub 查看源码" aria-label="GitHub 源码">↗</a>';
       }
       var toggleHtml = '';
       if (hasProgress && lessonPath) {

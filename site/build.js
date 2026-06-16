@@ -17,8 +17,10 @@ const ROADMAP_PATH = path.join(REPO_ROOT, 'ROADMAP.md');
 const GLOSSARY_PATH = path.join(REPO_ROOT, 'glossary', 'terms.md');
 const OUTPUT_PATH = path.join(__dirname, 'data.js');
 
-const GITHUB_BASE = 'https://github.com/fancyboi999/ai-engineering-from-scratch-zh/tree/main/';
-const SITE_ORIGIN = 'https://aieng-zh.cn';
+// 开源可移植:fork 部署只需设这两个环境变量即可让全站 SEO/社交卡/源码链接指向自己的域名与仓库,
+// 不设则回落到本仓库的官方部署(aieng-zh.cn)。CI/Vercel buildCommand 里 export 即可生效。
+const GITHUB_BASE = process.env.GITHUB_BASE || 'https://github.com/fancyboi999/ai-engineering-from-scratch-zh/tree/main/';
+const SITE_ORIGIN = process.env.SITE_ORIGIN || 'https://aieng-zh.cn';
 
 // 与浏览器端同一份渲染器（从 lesson.html 抽出）；预渲染产物 = 运行时渲染产物
 const mdRender = require('./md-render.js');
@@ -689,6 +691,9 @@ function writeLessonPages(phases) {
     setMeta('property', 'og:description', desc);
     setMeta('name', 'twitter:title', ogTitle);
     setMeta('name', 'twitter:description', desc);
+    // 社交卡图跟随 SITE_ORIGIN(模板里写死的 aieng 默认值会被覆盖),fork 部署即指向自己的图
+    setMeta('property', 'og:image', SITE_ORIGIN + '/og-image.png?v=2');
+    setMeta('name', 'twitter:image', SITE_ORIGIN + '/og-image.png?v=2');
     page = page.replace(
       /<link rel="canonical" href="[^"]*">/,
       () => '<link rel="canonical" href="' + url + '">\n  <meta property="og:url" content="' + url + '">'

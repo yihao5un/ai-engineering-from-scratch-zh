@@ -157,6 +157,19 @@
       color: var(--accent);
     }
 
+    /* 课名后的 GitHub 源码小图标:弱于课名的次要入口 */
+    .catalog-table .catalog-src {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      opacity: 0.55;
+      text-decoration: none;
+    }
+
+    .catalog-table .catalog-src:hover {
+      color: var(--accent);
+      opacity: 1;
+    }
+
     .catalog-status-dot {
       display: inline-block;
       width: 8px;
@@ -350,6 +363,12 @@
 
           for (var j = 0; j < p.lessons.length; j++) {
             var l = p.lessons[j];
+            // 从 GitHub tree url 抠出 phases/<phase>/<lesson>,转成站内预渲染页 /lessons/<phase>/<lesson>/
+            var sitePath = '';
+            if (l.url) {
+              var pm = l.url.match(/(phases\/[^/]+\/[^/]+)\/?$/);
+              if (pm) sitePath = '/lessons/' + pm[1].replace(/^phases\//, '') + '/';
+            }
             allRows.push({
               phase: p.id,
               phaseName: p.name,
@@ -357,7 +376,8 @@
               type: l.type,
               lang: l.lang,
               status: l.status,
-              url: l.url || ''
+              url: l.url || '',
+              siteUrl: sitePath
             });
           }
         }
@@ -435,7 +455,12 @@
             var r = rows[i];
             html += '<tr>';
             html += '<td><span class="catalog-phase-label">' + String(r.phase).padStart(2, '0') + '</span></td>';
-            if (r.url) {
+            if (r.siteUrl) {
+              // 课名进站内阅读页;GitHub 降为行尾小图标(查看源码)
+              html += '<td><a href="' + r.siteUrl + '" class="catalog-lesson-link">' + escapeHtml(r.name) + '</a>'
+                + (r.url ? ' <a href="' + r.url + '" target="_blank" rel="noopener" class="catalog-src" title="在 GitHub 查看源码" aria-label="GitHub 源码">↗</a>' : '')
+                + '</td>';
+            } else if (r.url) {
               html += '<td><a href="' + r.url + '" target="_blank" rel="noopener">' + escapeHtml(r.name) + '</a></td>';
             } else {
               html += '<td>' + escapeHtml(r.name) + '</td>';

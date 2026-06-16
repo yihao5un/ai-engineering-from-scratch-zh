@@ -709,6 +709,24 @@ p.dropcap::first-letter {
   border-bottom: 1px solid var(--blueprint);
 }
 
+/* 列5:GitHub 源码小图标(课名已进站内,这里是次要源码入口),覆盖 .modal-lesson>a 的课名样式 */
+.modal-lesson .modal-lesson-src {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--ink-mute);
+  text-decoration: none;
+  border-bottom: none;
+  overflow: visible;
+  min-width: 64px;
+  text-align: center;
+  transition: color 0.15s;
+}
+
+.modal-lesson .modal-lesson-src:hover {
+  color: var(--blueprint);
+  border-bottom: none;
+}
+
 .modal-lesson-read-placeholder {
   display: inline-block;
   width: 64px;

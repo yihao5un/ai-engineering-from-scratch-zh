@@ -2060,7 +2060,7 @@
 
       // 客户端逐课 SEO：动态设置 canonical / description / JSON-LD（LearningResource）
       function updateLessonSeo(title, md) {
-        var ORIGIN = 'https://aieng-zh.cn';
+        var ORIGIN = location.origin;  // 跟随部署域名:fork 部署时 canonical/og:url/JSON-LD 自动指向自己
         var path = new URLSearchParams(location.search).get('path') || '';
         if (!path) return;  // 防御：空 path 会生成 /lessons// 这种坏 canonical
         // canonical 指向预渲染静态页（SEO 主体）；旧 ?path= URL 仅作兼容入口
@@ -2076,6 +2076,8 @@
         set('meta[property="og:description"]', desc);
         set('meta[name="twitter:title"]', fullTitle);
         set('meta[name="twitter:description"]', desc);
+        set('meta[property="og:image"]', ORIGIN + '/og-image.png?v=2');   // 社交卡图跟随部署域名
+        set('meta[name="twitter:image"]', ORIGIN + '/og-image.png?v=2');
         var ogu = document.querySelector('meta[property="og:url"]');
         if (!ogu) { ogu = document.createElement('meta'); ogu.setAttribute('property', 'og:url'); document.head.appendChild(ogu); }
         ogu.setAttribute('content', url);
