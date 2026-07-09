@@ -92,8 +92,13 @@
   function unmarkLessonComplete(path) {
     if (!path) return;
     var state = read();
-    if (state.lessons[path] && state.lessons[path].completedAt) {
-      state.lessons[path].completedAt = null;
+    var lesson = state.lessons[path];
+    if (lesson && lesson.completedAt) {
+      delete lesson.completedAt;
+      // 若该课再无任何学习痕迹，整个条目也没必要留着
+      if (!lesson.visitedAt && (!lesson.answers || Object.keys(lesson.answers).length === 0)) {
+        delete state.lessons[path];
+      }
       write(state);
     }
   }

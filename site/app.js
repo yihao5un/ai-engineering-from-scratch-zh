@@ -20,6 +20,7 @@
     initSmoothScroll();
     initFadeObserver();
     initScrollExplode();
+    bindProgressActions('statExport', 'statImport', 'statImportFile');
   });
 
   function updateThemeIcon() {
@@ -352,8 +353,6 @@
     });
   }
 
-  // Home-page global progress export/import (the stat block buttons).
-  bindProgressActions('statExport', 'statImport', 'statImportFile');
 
 
   function closeModal() {
