@@ -14,10 +14,10 @@
     widget.className = 'progress-widget';
     widget.setAttribute('role', 'status');
     widget.innerHTML =
+      '<span class="progress-widget-save" id="progressWidgetSave"></span>' +
       '<span class="progress-widget-text" id="progressWidgetText">0 / 0</span>' +
       '<div class="progress-widget-bar"><div class="progress-widget-fill" id="progressWidgetFill"></div></div>' +
-      '<span class="progress-widget-pct" id="progressWidgetPct">0%</span>' +
-      '<span class="progress-widget-save" id="progressWidgetSave"></span>';
+      '<span class="progress-widget-pct" id="progressWidgetPct">0%</span>';
     document.body.appendChild(widget);
     return widget;
   }
