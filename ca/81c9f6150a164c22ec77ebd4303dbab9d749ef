@@ -1,0 +1,47 @@
+site/style.css
+  s_10ec7707fe47d3::t_2dc48dddefef84 1393-1485
+  s_10ec7707fe47d3::t_70814f5103a8a7 572
+site/progress.js
+  s_10ec7707fe47d3::t_a7eca346461ee2 208
+  s_10ec7707fe47d3::t_a5515d1c85243e 166-203,206,209,250,273,287,301,307,324,377,396
+  s_10ec7707fe47d3::t_e603cbfb05f389 27-28,143,163-165,204-205,207,210-249,251-272,274-286,288-300,302-306,308-323,325-376,378-395,408-414
+site/about.html
+  s_10ec7707fe47d3::t_136cdc2b8e798b 22,169
+site/glossary.html
+  s_10ec7707fe47d3::t_136cdc2b8e798b 22,235
+site/reminder.js
+  s_10ec7707fe47d3::t_bc821151ec562f 55,57-60,89
+  s_10ec7707fe47d3::t_ed4c4d58ec3054 45-46
+  s_10ec7707fe47d3::t_135e9ed5620adc 1-44,47-54,56,61-66,85-87,90-94
+  s_10ec7707fe47d3::t_5d1a5ca20992df 67-84,88
+site/app.js
+  s_10ec7707fe47d3::t_d5dc175c695a59 203,209-211,217-219,222-245
+  s_10ec7707fe47d3::t_6780369e9b29b3 204-208,212-216,220-221
+  s_10ec7707fe47d3::t_21def76d8d41b7 355-358
+site/index.html
+  s_10ec7707fe47d3::t_56c4d4329fd407 798-801
+  s_10ec7707fe47d3::t_136cdc2b8e798b 67,836-837,840
+  s_10ec7707fe47d3::t_da64b062d434c8 767-772
+site/prereqs.html
+  s_10ec7707fe47d3::t_136cdc2b8e798b 22,476
+site/lesson.html
+  s_10ec7707fe47d3::t_136cdc2b8e798b 22,1767-1768
+site/catalog.html
+  s_10ec7707fe47d3::t_136cdc2b8e798b 22,318
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "ca81c9f6150a164c22ec77ebd4303dbab9d749ef",
+  "prompts": {},
+  "sessions": {
+    "s_10ec7707fe47d3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f41b0-0a3f-7470-bf4d-3427eb1606e4",
+        "model": "glm-5.2"
+      },
+      "human_author": "yihao.sun <yihao.sun@jtexpress.com>"
+    }
+  }
+}
