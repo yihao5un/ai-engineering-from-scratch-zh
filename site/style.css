@@ -1426,7 +1426,6 @@ body[data-palette-open] {
   border-color: var(--blueprint);
 }
 /* Progress widget: brief popup with slick entrance/exit animation */
-/* === Progress widget — 3 style variants (switch via console: localStorage.setItem('pw-style','1|2|3')) === */
 
 /* shared base */
 .progress-widget {
@@ -1490,8 +1489,7 @@ body[data-palette-open] {
 @keyframes pw-spin { to { transform: rotate(360deg); } }
 @keyframes pw-pop { 0% { transform: scale(1); } 45% { transform: scale(1.25); } 100% { transform: scale(1); } }
 
-/* ---- Variant 1: minimal pill (default) ---- */
-.progress-widget[data-style="1"] {
+.progress-widget {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1501,7 +1499,7 @@ body[data-palette-open] {
   border-radius: 999px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
 }
-.progress-widget[data-style="1"] .progress-widget-bar {
+.progress-widget .progress-widget-bar {
   width: 110px;
   height: 5px;
   background: var(--rule-soft);
@@ -1510,56 +1508,3 @@ body[data-palette-open] {
   flex-shrink: 0;
 }
 
-/* ---- Variant 2: floating glass pill (horizontal, frosted) ---- */
-.progress-widget[data-style="2"] {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 14px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-}
-.progress-widget[data-style="2"] .progress-widget-bar {
-  width: 120px;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.08);
-  border-radius: 3px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-[data-theme="dark"] .progress-widget[data-style="2"] {
-  background: rgba(30, 30, 30, 0.72);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-[data-theme="dark"] .progress-widget[data-style="2"] .progress-widget-bar {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-/* ---- Variant 3: edge progress bar (bottom of screen) ---- */
-.progress-widget[data-style="3"] {
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 24px;
-  background: var(--bg, #fafaf5);
-  border-top: 1px solid var(--rule-soft);
-  border-radius: 0;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
-  transform: translateY(100%);
-}
-.progress-widget[data-style="3"].show { transform: translateY(0); }
-.progress-widget[data-style="3"] .progress-widget-bar {
-  flex: 1;
-  height: 4px;
-  background: var(--rule-soft);
-  border-radius: 2px;
-  overflow: hidden;
-}
