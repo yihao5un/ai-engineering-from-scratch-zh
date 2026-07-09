@@ -1,0 +1,36 @@
+site/style.css
+  s_10ec7707fe47d3::t_54961ee6941a65 1428,1431-1432,1434-1435,1438-1439,1443,1445-1446,1449,1451,1459,1465,1475,1482-1494,1497-1507,1511,1513,1515,1521-1530,1537
+  s_10ec7707fe47d3::t_ca8f7a4bd1a2ec 1429,1436,1440,1455-1458,1462,1467,1470-1474,1476,1478,1495-1496,1508-1510,1512,1514,1516,1518-1520,1531-1536,1538-1540
+  s_10ec7707fe47d3::t_d94bbbf03bc3ac 1477,1517
+site/reminder.js
+  s_10ec7707fe47d3::t_0f4c9e64abbf0f 2-4,7-8,10-27,30-41,67-92,97-98,102-108,114
+  s_10ec7707fe47d3::t_4aaaa522397afd 42-47,50-58,60-61,65-66
+site/app.js
+  s_c7bc6e7c0d40bd::t_5d47660c8dbf18 23
+site/progress.js
+  s_10ec7707fe47d3::t_8d618914426d4e 95-101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "62fec9bc0640357e3ad41762bd84132fe797c088",
+  "prompts": {},
+  "sessions": {
+    "s_10ec7707fe47d3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f41b0-0a3f-7470-bf4d-3427eb1606e4",
+        "model": "glm-5.2"
+      },
+      "human_author": "yihao.sun <yihao.sun@jtexpress.com>"
+    },
+    "s_c7bc6e7c0d40bd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f467f-26c3-7a62-ad12-0298a13d647f",
+        "model": "glm-5.2"
+      },
+      "human_author": "yihao.sun <yihao.sun@jtexpress.com>"
+    }
+  }
+}
