@@ -200,6 +200,49 @@
         window.AIFSProgress.reset();
       });
     }
+
+    bindProgressActions('modalExport', 'modalImport', 'modalImportFile');
+  }
+
+  function bindProgressActions(exportId, importId, importFileId) {
+    var exportBtn = document.getElementById(exportId);
+    if (exportBtn) {
+      exportBtn.addEventListener('click', function () {
+        if (!window.AIFSProgress) return;
+        // exportJSON returns a Promise<boolean>; false (e.g. user cancel) is silent,
+        // real failures bubble to .catch and surface an alert.
+        Promise.resolve(window.AIFSProgress.exportJSON()).catch(function () {
+          window.alert('导出失败，请稍后重试。');
+        });
+      });
+    }
+
+    var importBtn = document.getElementById(importId);
+    var importFile = document.getElementById(importFileId);
+    if (importBtn && importFile) {
+      importBtn.addEventListener('click', function () {
+        importFile.click();
+      });
+      importFile.addEventListener('change', function () {
+        if (!window.AIFSProgress) return;
+        var file = this.files && this.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          var ok = window.AIFSProgress.importJSON(String(reader.result || ''));
+          if (ok) {
+            window.alert('进度已导入并合并。');
+          } else {
+            window.alert('导入失败：文件格式不正确。');
+          }
+        };
+        reader.onerror = function () {
+          window.alert('读取文件失败，请重试。');
+        };
+        reader.readAsText(file);
+        this.value = '';
+      });
+    }
   }
 
   var currentPhaseIdx = -1;
@@ -308,6 +351,10 @@
       renderPhases();
     });
   }
+
+  // Home-page global progress export/import (the stat block buttons).
+  bindProgressActions('statExport', 'statImport', 'statImportFile');
+
 
   function closeModal() {
     document.getElementById('modalOverlay').classList.remove('open');
