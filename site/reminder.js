@@ -12,6 +12,9 @@
     widget = document.createElement('div');
     widget.id = 'progressWidget';
     widget.className = 'progress-widget';
+    var stylePref = '1';
+    try { stylePref = localStorage.getItem('pw-style') || '1'; } catch (e) {}
+    widget.setAttribute('data-style', stylePref);
     widget.setAttribute('role', 'status');
     widget.innerHTML =
       '<span class="progress-widget-save" id="progressWidgetSave"></span>' +
