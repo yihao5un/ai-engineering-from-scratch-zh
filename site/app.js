@@ -210,9 +210,8 @@
     if (exportBtn) {
       exportBtn.addEventListener('click', function () {
         if (!window.AIFSProgress) return;
-        // exportJSON returns a Promise<boolean>; false (e.g. user cancel) is silent,
-        // real failures bubble to .catch and surface an alert.
-        Promise.resolve(window.AIFSProgress.exportJSON()).catch(function () {
+        var forcePicker = (exportId === 'statExport');
+        Promise.resolve(window.AIFSProgress.exportJSON(false, forcePicker)).catch(function () {
           window.alert('导出失败，请稍后重试。');
         });
       });

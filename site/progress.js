@@ -335,13 +335,13 @@
    * overwritten on later exports. Falls back to a normal download where the
    * API is unavailable. Returns false if the user cancels the picker.
    */
-  async function exportJSON(silent) {
+  async function exportJSON(silent, forcePicker) {
     var state = read();
     var json = JSON.stringify(state, null, 2);
 
     if (window.showSaveFilePicker) {
       try {
-        var handle = await getStoredHandle();
+        var handle = forcePicker ? null : await getStoredHandle();
         if (handle) {
           var perm = handle.queryPermission
             ? await handle.queryPermission({ mode: 'readwrite' })
