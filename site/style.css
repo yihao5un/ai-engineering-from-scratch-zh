@@ -569,7 +569,7 @@ p.dropcap::first-letter {
   color: var(--ink-mute);
 }
 
-.modal-reset {
+.modal-reset, .modal-export, .modal-import {
   background: transparent;
   border: 1px solid var(--rule-soft);
   color: var(--ink-mute);
@@ -1390,3 +1390,121 @@ body[data-palette-open] {
     display: none;
   }
 }
+
+/* Global progress export/import actions (stat block) */
+.stat-block-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.stat-block-note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+  margin-right: auto;
+}
+
+.stat-block-btn {
+  background: transparent;
+  border: 1px solid var(--rule-soft);
+  color: var(--ink-mute);
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.stat-block-btn:hover {
+  color: var(--blueprint);
+  border-color: var(--blueprint);
+}
+/* Progress widget: brief popup with slick entrance/exit animation */
+
+/* shared base */
+.progress-widget {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  font-size: 0.74rem;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.progress-widget.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.progress-widget-text,
+.progress-widget-pct {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.progress-widget-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--blueprint), var(--blueprint-tint-strong, rgba(53, 83, 255, 0.6)));
+  background-size: 200% 100%;
+  animation: pw-shimmer 2s linear infinite;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes pw-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.progress-widget-save {
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-mute);
+  min-width: 56px;
+  transition: color 0.2s;
+}
+.progress-widget-save.saving { color: var(--blueprint); }
+.progress-widget-save.saving::after {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 6px;
+  border: 1.5px solid var(--blueprint);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: pw-spin 0.7s linear infinite;
+  vertical-align: -1px;
+}
+.progress-widget-save.saved { color: #2e9c5e; animation: pw-pop 0.4s ease; }
+@keyframes pw-spin { to { transform: rotate(360deg); } }
+@keyframes pw-pop { 0% { transform: scale(1); } 45% { transform: scale(1.25); } 100% { transform: scale(1); } }
+
+.progress-widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px;
+  background: var(--bg, #fafaf5);
+  border: 1px solid var(--rule-soft);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+.progress-widget .progress-widget-bar {
+  width: 110px;
+  height: 5px;
+  background: var(--rule-soft);
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+

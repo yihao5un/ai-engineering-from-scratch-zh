@@ -64,7 +64,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260525a">
+  <link rel="stylesheet" href="style.css?v=20260709a">
   <style>
     .manual-masthead {
       padding: 96px 0 24px;
@@ -764,6 +764,12 @@
           <span class="stat-row-value" data-stat="glossary-count">···</span>
         </div>
       </div>
+      <div class="stat-block-actions">
+        <span class="stat-block-note">进度保存在浏览器本地，可导出/导入 JSON 跨设备同步</span>
+        <button class="stat-block-btn" id="statExport" type="button">导出进度</button>
+        <button class="stat-block-btn" id="statImport" type="button">导入进度</button>
+        <input type="file" id="statImportFile" accept="application/json,.json" style="display:none;">
+      </div>
     </section>
 
     <section class="toc container" id="contents">
@@ -789,7 +795,10 @@
         </div>
         <div class="modal-lessons" id="modalLessons"></div>
         <div class="modal-footer">
-          <span class="modal-footer-note">进度仅保存在浏览器本地</span>
+          <span class="modal-footer-note">进度保存在浏览器本地，可导出/导入 JSON 跨设备同步</span>
+          <button class="modal-export" id="modalExport" type="button">导出进度</button>
+          <button class="modal-import" id="modalImport" type="button">导入进度</button>
+          <input type="file" id="modalImportFile" accept="application/json,.json" style="display:none;">
           <button class="modal-reset" id="modalReset" type="button">重置进度</button>
         </div>
       </div>
@@ -824,10 +833,11 @@
   </footer>
 
   <script src="data.js?v=20260525a"></script>
-  <script src="progress.js?v=20260525a"></script>
+  <script src="progress.js?v=20260709a"></script>
+  <script src="reminder.js?v=20260709a"></script>
   <script src="header.js?v=20260525a" defer></script>
   <script src="cmdpalette.js?v=20260525a" defer></script>
-  <script src="app.js?v=20260525a"></script>
+  <script src="app.js?v=20260709a"></script>
   <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
 </body>
 </html>

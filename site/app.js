@@ -20,6 +20,7 @@
     initSmoothScroll();
     initFadeObserver();
     initScrollExplode();
+    bindProgressActions('statExport', 'statImport', 'statImportFile');
   });
 
   function updateThemeIcon() {
@@ -200,6 +201,48 @@
         window.AIFSProgress.reset();
       });
     }
+
+    bindProgressActions('modalExport', 'modalImport', 'modalImportFile');
+  }
+
+  function bindProgressActions(exportId, importId, importFileId) {
+    var exportBtn = document.getElementById(exportId);
+    if (exportBtn) {
+      exportBtn.addEventListener('click', function () {
+        if (!window.AIFSProgress) return;
+        var forcePicker = (exportId === 'statExport');
+        Promise.resolve(window.AIFSProgress.exportJSON(false, forcePicker)).catch(function () {
+          window.alert('导出失败，请稍后重试。');
+        });
+      });
+    }
+
+    var importBtn = document.getElementById(importId);
+    var importFile = document.getElementById(importFileId);
+    if (importBtn && importFile) {
+      importBtn.addEventListener('click', function () {
+        importFile.click();
+      });
+      importFile.addEventListener('change', function () {
+        if (!window.AIFSProgress) return;
+        var file = this.files && this.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          var result = window.AIFSProgress.importJSON(String(reader.result || ''));
+          if (result && result.ok) {
+            window.alert('进度已导入并合并。');
+          } else {
+            window.alert('导入失败：' + (result && result.error ? result.error : '未知错误。'));
+          }
+        };
+        reader.onerror = function () {
+          window.alert('读取文件失败，请重试。');
+        };
+        reader.readAsText(file);
+        this.value = '';
+      });
+    }
   }
 
   var currentPhaseIdx = -1;
@@ -308,6 +351,8 @@
       renderPhases();
     });
   }
+
+
 
   function closeModal() {
     document.getElementById('modalOverlay').classList.remove('open');
