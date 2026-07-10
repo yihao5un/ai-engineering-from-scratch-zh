@@ -1,0 +1,69 @@
+site/style.css
+  s_10ec7707fe47d3::t_2dc48dddefef84 1393-1427,1432,1435,1437-1438,1440,1443,1445,1447,1454,1471,1474,1509-1510
+  s_10ec7707fe47d3::t_70814f5103a8a7 572
+  s_10ec7707fe47d3::t_54961ee6941a65 1428,1433-1434,1441-1442,1444,1446,1473,1476-1487,1491
+  s_10ec7707fe47d3::t_ca8f7a4bd1a2ec 1431,1468-1471,1474,1501,1505,1507,1509-1510
+  s_10ec7707fe47d3::t_8cc28aab4ba5da 1436,1439,1503-1504,1506,1508
+  s_10ec7707fe47d3::t_1fb93806cdd6e7 1429-1430,1448-1467,1472,1475,1488-1490,1493-1500
+  s_10ec7707fe47d3::t_ceb9a3de704f1c 1492,1502
+site/progress.js
+  s_10ec7707fe47d3::t_a7eca346461ee2 213
+  s_10ec7707fe47d3::t_a5515d1c85243e 171-208,211,214,255,278,292,306,312,329,382,401
+  s_10ec7707fe47d3::t_e603cbfb05f389 27-28,148,168-170,209-210,212,215-254,256-277,279-291,293-305,307-311,313-328,330-337,339-343,345-381,383-400,413-419
+  s_10ec7707fe47d3::t_8d618914426d4e 95-101
+  s_10ec7707fe47d3::t_4f319be2c8ac61 338,344
+site/about.html
+  s_10ec7707fe47d3::t_136cdc2b8e798b 22,169
+site/glossary.html
+  s_10ec7707fe47d3::t_136cdc2b8e798b 22,235
+site/reminder.js
+  s_10ec7707fe47d3::t_bc821151ec562f 54,112
+  s_10ec7707fe47d3::t_135e9ed5620adc 1,5-6,9,23-24,43-44,57-59,110,113-117
+  s_10ec7707fe47d3::t_5d1a5ca20992df 88-91,94-95,96,104-108,111
+  s_10ec7707fe47d3::t_0f4c9e64abbf0f 2-4,7-8,10-16,19,21-22,25-36,62-87,92,97-103,109
+  s_10ec7707fe47d3::t_4aaaa522397afd 37-42,45-53,55-56,60-61
+  s_10ec7707fe47d3::t_b75dc1794d6f9e 18
+  s_10ec7707fe47d3::t_b9e1aee1e699fc 17,20
+  s_10ec7707fe47d3::t_c8a6d4e8aff323 93
+site/app.js
+  s_10ec7707fe47d3::t_d5dc175c695a59 204,210-212,217-219,222-245
+  s_10ec7707fe47d3::t_6780369e9b29b3 205-209,215-216,220-221
+  s_10ec7707fe47d3::t_21def76d8d41b7 355-356
+  s_c7bc6e7c0d40bd::t_5d47660c8dbf18 23
+  s_10ec7707fe47d3::t_046cf7d13f8b0e 213
+  s_10ec7707fe47d3::t_4838acbfeead21 214
+site/index.html
+  s_10ec7707fe47d3::t_56c4d4329fd407 798-801
+  s_10ec7707fe47d3::t_136cdc2b8e798b 67,836-837,840
+  s_10ec7707fe47d3::t_da64b062d434c8 767-772
+site/prereqs.html
+  s_10ec7707fe47d3::t_136cdc2b8e798b 22,476
+site/lesson.html
+  s_10ec7707fe47d3::t_136cdc2b8e798b 22,1767-1768
+site/catalog.html
+  s_10ec7707fe47d3::t_136cdc2b8e798b 22,318
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "306180f8c5e8aae05d46e872b34923af0e4ca847",
+  "prompts": {},
+  "sessions": {
+    "s_10ec7707fe47d3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f41b0-0a3f-7470-bf4d-3427eb1606e4",
+        "model": "glm-5.2"
+      },
+      "human_author": "yihao.sun <yihao.sun@jtexpress.com>"
+    },
+    "s_c7bc6e7c0d40bd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f467f-26c3-7a62-ad12-0298a13d647f",
+        "model": "glm-5.2"
+      },
+      "human_author": "yihao.sun <yihao.sun@jtexpress.com>"
+    }
+  }
+}
