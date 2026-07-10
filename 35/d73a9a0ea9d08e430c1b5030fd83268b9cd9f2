@@ -1,0 +1,22 @@
+site/app.js
+  s_10ec7707fe47d3::t_046cf7d13f8b0e 213
+  s_10ec7707fe47d3::t_4838acbfeead21 214
+site/progress.js
+  s_10ec7707fe47d3::t_4f319be2c8ac61 338,344
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "35d73a9a0ea9d08e430c1b5030fd83268b9cd9f2",
+  "prompts": {},
+  "sessions": {
+    "s_10ec7707fe47d3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f41b0-0a3f-7470-bf4d-3427eb1606e4",
+        "model": "glm-5.2"
+      },
+      "human_author": "yihao.sun <yihao.sun@jtexpress.com>"
+    }
+  }
+}
