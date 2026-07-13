@@ -86,27 +86,72 @@
   // progress changes. Only runs when a file handle with write access already
   // exists -- never pops a picker. Debounced so bursts of changes write once.
   var autoExportTimer = null;
+  var autoExportRequest = 0;
+  var exportInFlight = false;
+  var queuedExportRequest = 0;
+
+  function runAutoExport(request) {
+    if (exportInFlight) {
+      queuedExportRequest = Math.max(queuedExportRequest, request);
+      return;
+    }
+    exportInFlight = true;
+    Promise.resolve(window.AIFSProgress.exportJSON(true)).then(function (ok) {
+      exportInFlight = false;
+      if (queuedExportRequest) {
+        var queued = queuedExportRequest;
+        queuedExportRequest = 0;
+        runAutoExport(queued);
+        return;
+      }
+      if (request !== autoExportRequest) return;
+      setSaveState(ok ? 'saved' : 'idle');
+      scheduleHide(ok ? 1800 : 600);
+    }).catch(function () {
+      exportInFlight = false;
+      if (queuedExportRequest) {
+        var queued = queuedExportRequest;
+        queuedExportRequest = 0;
+        runAutoExport(queued);
+        return;
+      }
+      if (request !== autoExportRequest) return;
+      setSaveState('idle');
+      scheduleHide(600);
+    });
+  }
+
   function scheduleAutoExport() {
-    if (!window.AIFSProgress || !window.AIFSProgress.exportJSON) return;
+    if (!window.AIFSProgress || !window.AIFSProgress.exportJSON || !window.AIFSProgress.canAutoExport) return;
     if (autoExportTimer) clearTimeout(autoExportTimer);
+    var request = ++autoExportRequest;
     show();
-    setSaveState('saving');
-    autoExportTimer = setTimeout(function () {
-      autoExportTimer = null;
-      Promise.resolve(window.AIFSProgress.exportJSON(true)).then(function (ok) {
-        setSaveState(ok ? 'saved' : 'idle');
-        // hold the "saved" state briefly, then fade out
-        scheduleHide(ok ? 1800 : 600);
-      }).catch(function () {
-        setSaveState('idle');
-        scheduleHide(600);
-      });
-    }, 2000);
+    setSaveState('idle');
+    Promise.resolve(window.AIFSProgress.canAutoExport()).then(function (canExport) {
+      if (request !== autoExportRequest) return;
+      if (!canExport) {
+        scheduleHide(2400);
+        return;
+      }
+      setSaveState('saving');
+      autoExportTimer = setTimeout(function () {
+        autoExportTimer = null;
+        runAutoExport(request);
+      }, 2000);
+    }).catch(function () {
+      if (request === autoExportRequest) scheduleHide(2400);
+    });
   }
 
   function init() {
     if (!window.AIFSProgress) return;
-    window.AIFSProgress.onChange(scheduleAutoExport);
+    var completed = window.AIFSProgress.totalCompleted();
+    window.AIFSProgress.onChange(function () {
+      var nextCompleted = window.AIFSProgress.totalCompleted();
+      if (nextCompleted === completed) return;
+      completed = nextCompleted;
+      scheduleAutoExport();
+    });
   }
 
   if (document.readyState === 'loading') {

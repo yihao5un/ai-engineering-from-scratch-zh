@@ -24,8 +24,6 @@
  */
 (function () {
   var STORAGE_KEY = 'aifs:progress:v1';
-  var REMIND_KEY = 'aifs:progress:remind';
-  var REMIND_THRESHOLD = 1; // completed lessons since last export before nudging
   var listeners = [];
 
   function emptyState() {
@@ -46,14 +44,17 @@
 
   function write(state) {
     state.updatedAt = Date.now();
+    var saved = false;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      saved = true;
     } catch (e) {
       // quota or disabled storage; fail silently
     }
     for (var i = 0; i < listeners.length; i++) {
       try { listeners[i](state); } catch (_) {}
     }
+    return saved;
   }
 
   function ensureLesson(state, path) {
@@ -145,7 +146,6 @@
 
   function reset() {
     try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-    try { localStorage.removeItem(REMIND_KEY); } catch (e) {}
     for (var i = 0; i < listeners.length; i++) {
       try { listeners[i](emptyState()); } catch (_) {}
     }
@@ -165,53 +165,6 @@
     }
   });
 
-  // --- Export reminder: nudge the user to back up after N new completions ---
-  // Remind state is device-local (about THIS device's export habits) and is
-  // intentionally NOT part of the exported progress JSON.
-  // Remind state tracks RELATIVE pending counts, not absolute totals.
-  //   lastExportedTotal: totalCompleted() snapshot at last export/import.
-  //   dismissedPending: pendingExportCount() snapshot at last dismissal.
-  // pending = totalCompleted() - lastExportedTotal  (always >= 0).
-  function getRemindState() {
-    try {
-      var raw = localStorage.getItem(REMIND_KEY);
-      if (raw) {
-        var p = JSON.parse(raw);
-        if (p && typeof p === 'object') {
-          return {
-            lastExportedTotal: typeof p.lastExportedTotal === 'number' ? p.lastExportedTotal : 0,
-            dismissedPending: typeof p.dismissedPending === 'number' ? p.dismissedPending : 0
-          };
-        }
-      }
-    } catch (e) {}
-    return { lastExportedTotal: 0, dismissedPending: 0 };
-  }
-
-  function writeRemindState(s) {
-    try { localStorage.setItem(REMIND_KEY, JSON.stringify(s)); } catch (e) {}
-  }
-
-  function pendingExportCount() {
-    var s = getRemindState();
-    return Math.max(0, totalCompleted() - s.lastExportedTotal);
-  }
-
-  function markExported() {
-    var n = totalCompleted();
-    writeRemindState({ lastExportedTotal: n, dismissedPending: 0 });
-  }
-
-  function dismissReminder() {
-    var p = pendingExportCount();
-    writeRemindState({ lastExportedTotal: getRemindState().lastExportedTotal, dismissedPending: p });
-  }
-
-  function shouldRemind() {
-    var s = getRemindState();
-    var pending = Math.max(0, totalCompleted() - s.lastExportedTotal);
-    return pending >= REMIND_THRESHOLD && (pending - s.dismissedPending) >= REMIND_THRESHOLD;
-  }
   /**
    * Merge a remote state into the local state using per-lesson timestamps.
    * - completedAt: once non-null on either side, stays non-null (completion is irreversible).
@@ -225,16 +178,16 @@
     for (var k in local.lessons) allPaths[k] = true;
     for (var k in remote.lessons) allPaths[k] = true;
     for (var path in allPaths) {
-      var l = local.lessons[path];
-      var r = remote.lessons[path];
-      if (!l) { merged.lessons[path] = r; continue; }
-      if (!r) { merged.lessons[path] = l; continue; }
+      var l = local.lessons[path] || {};
+      var r = remote.lessons[path] || {};
       var mergedAnswers = {};
       var allQids = {};
-      for (var q in l.answers) allQids[q] = true;
-      for (var q in r.answers) allQids[q] = true;
+      var lAnswers = l.answers || {};
+      var rAnswers = r.answers || {};
+      for (var q in lAnswers) allQids[q] = true;
+      for (var q in rAnswers) allQids[q] = true;
       for (var qid in allQids) {
-        var la = l.answers[qid], ra = r.answers[qid];
+        var la = lAnswers[qid], ra = rAnswers[qid];
         if (!la) { mergedAnswers[qid] = ra; continue; }
         if (!ra) { mergedAnswers[qid] = la; continue; }
         mergedAnswers[qid] = (la.t || 0) >= (ra.t || 0) ? la : ra;
@@ -305,6 +258,18 @@
     });
   }
 
+  async function canAutoExport() {
+    if (!window.showSaveFilePicker) return false;
+    try {
+      var handle = await getStoredHandle();
+      if (!handle) return false;
+      if (!handle.queryPermission) return false;
+      return await handle.queryPermission({ mode: 'readwrite' }) === 'granted';
+    } catch (e) {
+      return false;
+    }
+  }
+
   async function writeHandle(handle, text) {
     var writable = await handle.createWritable();
     await writable.write(text);
@@ -367,13 +332,13 @@
             : 'prompt';
           if (perm === 'granted') {
             await writeHandle(handle, json);
-            return markExported(), true;
+            return true;
           }
           if (!silent && perm === 'prompt' && handle.requestPermission) {
             var granted = await handle.requestPermission({ mode: 'readwrite' });
             if (granted === 'granted') {
               await writeHandle(handle, json);
-              return markExported(), true;
+              return true;
             }
             // denied -> fall through to picker
           } else if (silent) {
@@ -388,7 +353,7 @@
         });
         await writeHandle(handle, json);
         await setStoredHandle(handle);
-        return markExported(), true;
+        return true;
       } catch (e) {
         if (e && e.name === 'AbortError') return false; // user cancelled
         // other error -> fall through to legacy download
@@ -396,7 +361,6 @@
     }
 
     var ok = legacyDownload(json);
-    if (ok) markExported();
     return ok;
   }
 
@@ -428,11 +392,19 @@
     if (version != null && version !== SCHEMA_VERSION) {
       return { ok: false, error: '版本不匹配：文件版本为 v' + version + '，当前支持 v' + SCHEMA_VERSION + '。' };
     }
-    var local = read();
-    var merged = mergeStates(local, { lessons: lessons, updatedAt: remote.updatedAt || 0 });
-    write(merged);
-    markExported(); // imported data is itself a backup baseline
-    return { ok: true };
+    if (typeof lessons !== 'object' || Array.isArray(lessons)) {
+      return { ok: false, error: '文件结构不正确：lessons 必须是对象。' };
+    }
+    try {
+      var local = read();
+      var merged = mergeStates(local, { lessons: lessons, updatedAt: remote.updatedAt || 0 });
+      if (!write(merged)) {
+        return { ok: false, error: '导入失败：浏览器无法保存进度。' };
+      }
+      return { ok: true };
+    } catch (e) {
+      return { ok: false, error: '导入失败：无法合并或保存进度。' };
+    }
   }
   window.AIFSProgress = {
     recordVisit: recordVisit,
@@ -446,12 +418,9 @@
     totalCompleted: totalCompleted,
     reset: reset,
     exportJSON: exportJSON,
+    canAutoExport: canAutoExport,
     importJSON: importJSON,
     mergeStates: mergeStates,
-    markExported: markExported,
-    dismissReminder: dismissReminder,
-    pendingExportCount: pendingExportCount,
-    shouldRemind: shouldRemind,
     onChange: onChange,
   };
 })();
